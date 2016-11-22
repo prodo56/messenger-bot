@@ -28,46 +28,24 @@ app.get('/webhook/', function (req, res) {
 })
 
 
-function sendTextMessage(sender, text) {
-    let messageData = { text:text }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-}
+var rmp = require("rmp-api");
+ 
+var callback = function(professor) {
+  if (professor === null) {
+    console.log("No professor found.");
+    return;
+  }
+  console.log("Name: " + professor.fname + " " + professor.lname);
+  console.log("University: "+ professor.university);
+  console.log("Quality: " + professor.quality);
+  console.log("Easiness: " + professor.easiness);
+  console.log("Helpfulness: " + professor.help);
+  console.log("Average Grade: " + professor.grade);
+  console.log("Chili: " + professor.chili);
+  console.log("URL: " + professor.url);
+  console.log("First comment: " + professor.comments[0]);
+};
 
-app.post('/webhook/', function (req, res) {
-    let messaging_events = req.body.entry[0].messaging
-    for (let i = 0; i < messaging_events.length; i++) {
-      let event = req.body.entry[0].messaging[i]
-      let sender = event.sender.id
-      if (event.message && event.message.text) {
-        let text = event.message.text
-        if (text === 'Generic') {
-            sendGenericMessage(sender)
-            continue
-        }
-        sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
-      }
-      if (event.postback) {
-        let text = JSON.stringify(event.postback)
-        sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-        continue
-      }
-    }
-    res.sendStatus(200)
-  })
 
 function sendGenericMessage(sender) {
     let messageData = {
@@ -117,6 +95,48 @@ function sendGenericMessage(sender) {
         }
     })
 }
+
+function sendTextMessage(sender, text) {
+    let messageData = { text:text }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+app.post('/webhook/', function (req, res) {
+    let messaging_events = req.body.entry[0].messaging
+    for (let i = 0; i < messaging_events.length; i++) {
+      let event = req.body.entry[0].messaging[i]
+      let sender = event.sender.id
+      if (event.message && event.message.text) {
+        let text = event.message.text
+        if (text === 'Generic') {
+            sendGenericMessage(sender)
+            continue
+        }
+        sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+      }
+      if (event.postback) {
+        let text = JSON.stringify(event.postback)
+        sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+        continue
+      }
+    }
+    res.sendStatus(200)
+  })
+
 
 // Spin up the server
 app.listen(app.get('port'), function() {
