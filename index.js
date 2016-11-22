@@ -58,7 +58,7 @@ function sendGenericMessage(sender) {
                     "subtitle": "Professor Review",
                     "buttons": [{
                         "type": "postback",
-                        "title": "Type in Professor's Full Name",
+                        "title": "Professor",
                         "payload": "Type in Professor's Full Name",
                     }],
                 }, {
@@ -66,7 +66,7 @@ function sendGenericMessage(sender) {
                     "subtitle": "University Review",
                     "buttons": [{
                         "type": "postback",
-                        "title": "Type in University",
+                        "title": "University",
                         "payload": "Type in University",
                     }],
                 }]
@@ -124,10 +124,7 @@ app.post('/webhook/', function (req, res) {
       }
       if (event.postback) {
         let text = JSON.stringify(event.postback)
-        if(text == "Type in Professor's Full Name"){
-        	sendTextMessage(sender, "Postback received: Type in Professor's Full Name", token)
-        }
-        //sendTextMessage(sender, "Postback received: "+JSON.stringify(review).substring(0, 200), token)
+        sendTextMessage(sender, "Postback received: "+JSON.stringify(review).substring(0, 200), token)
         continue
       }
     }
