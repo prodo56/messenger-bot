@@ -58,7 +58,7 @@ function sendGenericMessage(sender) {
                     "subtitle": "Professor Review",
                     "buttons": [{
                         "type": "postback",
-                        "title": "Postback",
+                        "title": "Type in Professor's Full Name",
                         "payload": "Type in Professor's Full Name",
                     }],
                 }, {
@@ -66,7 +66,7 @@ function sendGenericMessage(sender) {
                     "subtitle": "University Review",
                     "buttons": [{
                         "type": "postback",
-                        "title": "Postback",
+                        "title": "Type in University",
                         "payload": "Type in University",
                     }],
                 }]
