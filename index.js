@@ -62,6 +62,7 @@ var callback = function(professor) {
             }
         }
     }
+    console.log(messageData);
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
