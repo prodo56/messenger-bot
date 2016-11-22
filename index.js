@@ -81,6 +81,7 @@ var callback = function(professor) {
             console.log('Error: ', response.body.error)
         }
     })
+    
   //sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
   sendTextMessage(senderid,"Name: " + professor.fname + " " + professor.lname);
   sendTextMessage(senderid,"University: "+ professor.university);
