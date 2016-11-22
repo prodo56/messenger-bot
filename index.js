@@ -35,6 +35,7 @@ var callback = function(professor) {
     console.log("No professor found.");
     return;
   }
+  return professor;
   console.log("Name: " + professor.fname + " " + professor.lname);
   console.log("University: "+ professor.university);
   console.log("Quality: " + professor.quality);
