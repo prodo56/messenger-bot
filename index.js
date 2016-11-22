@@ -47,15 +47,18 @@ var callback = function(professor) {
                     "buttons": [{
                         "type": "postback",
                         "title": "Quality: " + professor.quality,
+                        "payload": "Type in Professor's Full Name",
         				
                     },
                     {
                         "type": "postback",
                         "title": "Easiness: " + professor.easiness,
+                        "payload": "Type in Professor's Full Name",
                     },
                     {
                         "type": "postback",
-                        "title": "Helpfulness: " + professor.help
+                        "title": "Helpfulness: " + professor.help,
+                        "payload": "Type in Professor's Full Name",
                         
                     }]
                 }]
