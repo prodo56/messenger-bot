@@ -27,7 +27,7 @@ app.get('/webhook/', function (req, res) {
     res.send('Error, wrong token')
 })
 
-
+var senderid;
 var rmp = require("rmp-api");
  
 var callback = function(professor) {
@@ -35,7 +35,7 @@ var callback = function(professor) {
     console.log("No professor found.");
     return;
   }
-  return professor;
+  sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
   console.log("Name: " + professor.fname + " " + professor.lname);
   console.log("University: "+ professor.university);
   console.log("Quality: " + professor.quality);
@@ -110,11 +110,14 @@ function sendTextMessage(sender, text) {
     })
 }
 
+
+
 app.post('/webhook/', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
     for (let i = 0; i < messaging_events.length; i++) {
       let event = req.body.entry[0].messaging[i]
       let sender = event.sender.id
+      senderid = sender;
       if (event.message && event.message.text) {
         let text = event.message.text
         if (text.toUpperCase() === 'HI' || text.toUpperCase() == 'Hey') {
