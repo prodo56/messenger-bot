@@ -42,7 +42,7 @@ var callback = function(professor) {
   sendTextMessage("Easiness: " + professor.easiness);
   sendTextMessage("Helpfulness: " + professor.help);
   sendTextMessage("Average Grade: " + professor.grade);
-  csendTextMessage("Chili: " + professor.chili);
+  sendTextMessage("Chili: " + professor.chili);
   sendTextMessage("URL: " + professor.url);
   sendTextMessage("First comment: " + professor.comments[0]);
 };
