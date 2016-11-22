@@ -67,7 +67,7 @@ function sendGenericMessage(sender) {
                     "buttons": [{
                         "type": "postback",
                         "title": "Postback",
-                        "payload": "Type in University Name",
+                        "payload": "Type in University",
                     }],
                 }]
             }
@@ -124,8 +124,7 @@ app.post('/webhook/', function (req, res) {
       }
       if (event.postback) {
         let text = JSON.stringify(event.postback)
-        
-        sendTextMessage(sender, "Professor Rating:: "+text.substring(0, 200), token)
+        sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
         continue
       }
     }
