@@ -35,6 +35,7 @@ var callback = function(professor) {
     console.log("No professor found.");
     return;
   }
+  sendGenericMessage1(senderid,professor)
   //sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
   sendTextMessage(senderid,"Name: " + professor.fname + " " + professor.lname);
   sendTextMessage(senderid,"University: "+ professor.university);
@@ -47,6 +48,50 @@ var callback = function(professor) {
   sendTextMessage(senderid,"First comment: " + professor.comments[0]);
 };
 
+
+function sendGenericMessage1(sender,professor) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": professor.fname + " " + professor.lname,
+                    "subtitle": professor.university,
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "Quality: " + professor.quality,
+        				
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Easiness: " + professor.easiness,
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Helpfulness: " + professor.help
+                        
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
 
 function sendGenericMessage(sender) {
     let messageData = {
@@ -132,7 +177,7 @@ app.post('/webhook/', function (req, res) {
       }
       if (event.postback) {
         let text = JSON.stringify(event.postback)
-        sendTextMessage(sender, "Postback received: "+event.postback['payload'].substring(0, 200), token)
+        sendTextMessage(sender, event.postback['payload'].substring(0, 200), token)
         continue
       }
     }
