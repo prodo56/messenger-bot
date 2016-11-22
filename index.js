@@ -35,22 +35,8 @@ var callback = function(professor) {
     console.log("No professor found.");
     return;
   }
-  sendGenericMessage1(senderid,professor)
-  //sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
-  sendTextMessage(senderid,"Name: " + professor.fname + " " + professor.lname);
-  sendTextMessage(senderid,"University: "+ professor.university);
-  sendTextMessage(senderid,"Quality: " + professor.quality);
-  sendTextMessage(senderid,"Easiness: " + professor.easiness);
-  sendTextMessage(senderid,"Helpfulness: " + professor.help);
-  sendTextMessage(senderid,"Average Grade: " + professor.grade);
-  sendTextMessage(senderid,"Chili: " + professor.chili);
-  sendTextMessage(senderid,"URL: " + professor.url);
-  sendTextMessage(senderid,"First comment: " + professor.comments[0]);
-};
-
-
-function sendGenericMessage1(sender,professor) {
-    let messageData = {
+  //sendGenericMessage1(senderid,professor)
+  let messageData = {
         "attachment": {
             "type": "template",
             "payload": {
@@ -91,6 +77,21 @@ function sendGenericMessage1(sender,professor) {
             console.log('Error: ', response.body.error)
         }
     })
+  //sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
+  sendTextMessage(senderid,"Name: " + professor.fname + " " + professor.lname);
+  sendTextMessage(senderid,"University: "+ professor.university);
+  sendTextMessage(senderid,"Quality: " + professor.quality);
+  sendTextMessage(senderid,"Easiness: " + professor.easiness);
+  sendTextMessage(senderid,"Helpfulness: " + professor.help);
+  sendTextMessage(senderid,"Average Grade: " + professor.grade);
+  sendTextMessage(senderid,"Chili: " + professor.chili);
+  sendTextMessage(senderid,"URL: " + professor.url);
+  sendTextMessage(senderid,"First comment: " + professor.comments[0]);
+};
+
+
+function sendGenericMessage1(sender,professor) {
+    
 }
 
 function sendGenericMessage(sender) {
