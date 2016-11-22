@@ -35,16 +35,16 @@ var callback = function(professor) {
     console.log("No professor found.");
     return;
   }
-  sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
-  console.log("Name: " + professor.fname + " " + professor.lname);
-  console.log("University: "+ professor.university);
-  console.log("Quality: " + professor.quality);
-  console.log("Easiness: " + professor.easiness);
-  console.log("Helpfulness: " + professor.help);
-  console.log("Average Grade: " + professor.grade);
-  console.log("Chili: " + professor.chili);
-  console.log("URL: " + professor.url);
-  console.log("First comment: " + professor.comments[0]);
+  //sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
+  sendTextMessage("Name: " + professor.fname + " " + professor.lname);
+  sendTextMessage("University: "+ professor.university);
+  sendTextMessage("Quality: " + professor.quality);
+  sendTextMessage("Easiness: " + professor.easiness);
+  sendTextMessage("Helpfulness: " + professor.help);
+  sendTextMessage("Average Grade: " + professor.grade);
+  csendTextMessage("Chili: " + professor.chili);
+  sendTextMessage("URL: " + professor.url);
+  sendTextMessage("First comment: " + professor.comments[0]);
 };
 
 
@@ -110,6 +110,9 @@ function sendTextMessage(sender, text) {
     })
 }
 
+function review(name){
+	rmp.get("Paul Lynch", callback)
+}
 
 
 app.post('/webhook/', function (req, res) {
@@ -124,7 +127,8 @@ app.post('/webhook/', function (req, res) {
             sendGenericMessage(sender)
             continue
         }
-        sendTextMessage(sender, "Review: " + JSON.stringify(rmp.get("Paul Lynch", callback)))
+        review(text)
+        //sendTextMessage(sender, "Review: " + JSON.stringify(rmp.get("Paul Lynch", callback)))
       }
       if (event.postback) {
         let text = JSON.stringify(event.postback)
