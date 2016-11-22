@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
-const token="EAAHtSVEcZCUEBAJWOGcaysKVcZB59bQboXZBhM6UZB3QU7Fs0wntxgbZBMqGAF7KyhS9evjtuY8cAczl8JtZBILtT3HP7qnCwFC7ToZAkfqT8d27xZAerB3UzaScfvSuSUJhEOmglTMBFVNLZBMpGplCevzaKaVkvv8OVUEj3SpqdcwZDZD"
+const token = process.env.FB_PAGE_ACCESS_TOKEN
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -19,7 +19,13 @@ app.get('/', function (req, res) {
     res.send('Hello world, I am a chat bot')
 })
 
-
+// for Facebook verification
+app.get('/webhook/', function (req, res) {
+    if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
+        res.send(req.query['hub.challenge'])
+    }
+    res.send('Error, wrong token')
+})
 
 app.post('/webhook/', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
