@@ -67,7 +67,7 @@ var callback = function(professor) {
         qs: {access_token:token},
         method: 'POST',
         json: {
-            recipient: {id:sender},
+            recipient: {id:senderid},
             message: messageData,
         }
     }, function(error, response, body) {
