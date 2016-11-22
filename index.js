@@ -36,15 +36,15 @@ var callback = function(professor) {
     return;
   }
   //sendTextMessage(senderid, "Review: " + JSON.stringify(professor))
-  sendTextMessage("Name: " + professor.fname + " " + professor.lname);
-  sendTextMessage("University: "+ professor.university);
-  sendTextMessage("Quality: " + professor.quality);
-  sendTextMessage("Easiness: " + professor.easiness);
-  sendTextMessage("Helpfulness: " + professor.help);
-  sendTextMessage("Average Grade: " + professor.grade);
-  sendTextMessage("Chili: " + professor.chili);
-  sendTextMessage("URL: " + professor.url);
-  sendTextMessage("First comment: " + professor.comments[0]);
+  sendTextMessage(senderid,"Name: " + professor.fname + " " + professor.lname);
+  sendTextMessage(senderid,"University: "+ professor.university);
+  sendTextMessage(senderid,"Quality: " + professor.quality);
+  sendTextMessage(senderid,"Easiness: " + professor.easiness);
+  sendTextMessage(senderid,"Helpfulness: " + professor.help);
+  sendTextMessage(senderid,"Average Grade: " + professor.grade);
+  sendTextMessage(senderid,"Chili: " + professor.chili);
+  sendTextMessage(senderid,"URL: " + professor.url);
+  sendTextMessage(senderid,"First comment: " + professor.comments[0]);
 };
 
 
