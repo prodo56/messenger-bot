@@ -120,11 +120,11 @@ app.post('/webhook/', function (req, res) {
             sendGenericMessage(sender)
             continue
         }
-        sendTextMessage(sender, "Review: " + JSON.stringify(rmp.get("Paul Lynch", callback)).substring(0, 200), token)
+        sendTextMessage(sender, "Review: " + JSON.stringify(rmp.get("Paul Lynch", callback)))
       }
       if (event.postback) {
         let text = JSON.stringify(event.postback)
-        sendTextMessage(sender, "Postback received: "+JSON.stringify(text).substring(0, 200), token)
+        sendTextMessage(sender, "Postback received: "+event.postback['payload'].substring(0, 200), token)
         continue
       }
     }
