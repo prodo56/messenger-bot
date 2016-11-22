@@ -128,7 +128,7 @@ app.post('/webhook/', function (req, res) {
         	sendTextMessage(sender, "Postback received: Type in Professor's Full Name", token)
         	sendTextMessage(sender, "Review: "+JSON.stringify(rmp.get("Paul Lynch", callback)), token)
         }
-        sendTextMessage(sender, "Postback received: "+JSON.stringify(review).substring(0, 200), token)
+        //sendTextMessage(sender, "Postback received: "+JSON.stringify(review).substring(0, 200), token)
         continue
       }
     }
