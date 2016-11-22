@@ -124,7 +124,14 @@ app.post('/webhook/', function (req, res) {
       }
       if (event.postback) {
         let text = JSON.stringify(event.postback)
-        sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+        if(text == "Type in Professor's Full Name"){
+        	let messaging_events1 = req.body.entry[0].messaging
+        	let event = req.body.entry[0].messaging[0]
+        	if (event.message && event.message.text) {
+        	let professor = event.message.text
+        	let review = rmp.get("Paul Lynch", callback);
+        }
+        sendTextMessage(sender, "Postback received: "+JSON.stringify(review).substring(0, 200), token)
         continue
       }
     }
