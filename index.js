@@ -52,7 +52,7 @@ function sendGenericMessage(sender) {
         "attachment": {
             "type": "template",
             "payload": {
-                "template_type": "hi",
+                "template_type": "generic",
                 "elements": [{
                     "title": "Ask about Professor",
                     "subtitle": "Professor Review",
