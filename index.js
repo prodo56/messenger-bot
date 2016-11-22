@@ -55,11 +55,20 @@ function sendGenericMessage(sender) {
                 "template_type": "hi",
                 "elements": [{
                     "title": "Ask about Professor",
-                    "subtitle": "About Professor",
-                    
+                    "subtitle": "Professor Review",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Type in Professor's Full Name",
+                    }],
                 }, {
                     "title": "Ask about University",
-                    "subtitle": "About University",
+                    "subtitle": "University Review",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Type in University Name",
+                    }],
                 }]
             }
         }
@@ -107,7 +116,7 @@ app.post('/webhook/', function (req, res) {
       let sender = event.sender.id
       if (event.message && event.message.text) {
         let text = event.message.text
-        if (text === 'Generic') {
+        if (text.toUpperCase() === 'HI' || text.toUpperCase() == 'Hey') {
             sendGenericMessage(sender)
             continue
         }
@@ -115,7 +124,16 @@ app.post('/webhook/', function (req, res) {
       }
       if (event.postback) {
         let text = JSON.stringify(event.postback)
-        sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+        var json;
+        if(text == "Type in Professor's Full Name"){
+
+        	let messaging_events = req.body.entry[0].messaging
+      			let event = req.body.entry[0].messaging[0]
+      			if (event.message && event.message.text) {
+        			let professor = event.message.text
+        			json = rmp.get(professor, callback);
+        		}
+        sendTextMessage(sender, "Professor Rating:: "+text.substring(0, 200), token)
         continue
       }
     }
