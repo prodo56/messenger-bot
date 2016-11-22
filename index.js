@@ -71,7 +71,7 @@ function sendGenericMessage1(sender,professor) {
                         "type": "postback",
                         "title": "Helpfulness: " + professor.help
                         
-                    }],
+                    }]
                 }]
             }
         }
