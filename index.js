@@ -111,7 +111,7 @@ function sendTextMessage(sender, text) {
 }
 
 function review(name){
-	rmp.get("Paul Lynch", callback)
+	rmp.get(name, callback)
 }
 
 
